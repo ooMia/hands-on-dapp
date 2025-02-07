@@ -1,0 +1,12 @@
+{
+  "type": "module",
+  "scripts": {
+    "build": "sh src/sol/build.sh",
+    "prestart": "anvil --allow-origin 'http://localhost:3000' & npm run build",
+    "start": "node src/node/index.js",
+    "poststart": "pkill anvil"
+  },
+  "devDependencies": {
+    "solc": "0.8.28"
+  }
+}
