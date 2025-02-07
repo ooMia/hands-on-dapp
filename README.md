@@ -1,2 +1,7 @@
-# hands-on-dapp
-연재 중인 DApp 제작 가이드 레포 https://spems.tistory.com/category/Learn/UPSIDE
+# case1-hello-world
+
+의존성을 최소화한 간단한 DApp
+
+```bash
+npm run start
+```
