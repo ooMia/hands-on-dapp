@@ -22,7 +22,7 @@ sequenceDiagram
 
     create participant F as Forge
     N ->> F: src/sol/build.sh
-    F -->> F: Build contract with sol
+    F -->> F: Build contract with solc
     create participant A as Anvil
     N ->> A: start Anvil on :3000
     Note right of A: allow-origin :3000
