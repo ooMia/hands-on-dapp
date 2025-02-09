@@ -13,7 +13,6 @@ export TARGET=$(
     --broadcast | grep -oE 'Deployed to: 0x[0-9a-fA-F]{40}' | sed 's/Deployed to: //'
 )
 
-# function call: "World" as default
+# DEBUG: function call: "World" as default
 echo "\x1b[32m$(cast call $TARGET "getName()(string)" \
 --private-key $PRIVATE_KEY)\x1b[0m"
-

@@ -9,24 +9,39 @@ npm start
 ```
 
 ### Sequence Diagram
+
 ```mermaid
 sequenceDiagram
-    participant User
-    participant Node
-    participant Foundry
-    participant Server
 
-    User->>Node: npm start
-    Node->>Node: npm prestart
-    Node->>Foundry: start anvil<br>localhost:8545
-    Node->>Node: npm build
-    Node->>Foundry: build contract
-    Node->>Server: start server
+    actor U as User
+    participant N as Node
 
-    User->>Server: access DApp<br>localhost:3000
-    Server->>Foundry: contract on 1st tx
-    Foundry->>Server: return address
-    Server->>Foundry: fetch getName()
-    Foundry->>Server: return "World"
-    Server->>User: display "Hello, World!"
+    U ->> N: npm install
+    U ->> N: npm start
+    N -> N: npm prestart
+
+    create participant F as Forge
+    N ->> F: src/sol/build.sh
+    F -->> F: Build contract with sol
+    create participant A as Anvil
+    N ->> A: start Anvil on :3000
+    Note right of A: allow-origin :3000
+
+    F -->> A: Deploy as the 9th admin
+
+    box rgba(33,66,99,0.5) Foundry
+    participant A
+    participant F
+    end
+
+    create participant S as Server
+    N ->> S: src/node/index.js<br>start Server on :3000
+
+    Note over U,S: e2e interaction
+    U ->> S: localhost:3000
+    S ->> A: contract on 1st tx
+    A -->> S: return address
+    S ->> A: fetch getName()
+    A -->> S: return "World"
+    S -->> U: display "Hello, World!"
 ```
