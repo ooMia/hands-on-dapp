@@ -3,5 +3,7 @@
 의존성을 최소화한 간단한 DApp
 
 ```bash
-npm run start
+npm install
+
+npm start
 ```
