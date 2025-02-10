@@ -15,4 +15,4 @@ git checkout case1-hello-world
 - [0 - DApp은 어떻게 만들 수 있을까요?](https://spems.tistory.com/101)
 - [1 - 기본 개발 환경 셋업](https://spems.tistory.com/102)
 - [2 - DApp 개발 환경 셋업](https://spems.tistory.com/103)
-- [3 - Case1: Hello, World!](https://spems.tistory.com/104)
+- [3 - 스마트 컨트랙트 개발 환경 셋업](https://spems.tistory.com/104)
