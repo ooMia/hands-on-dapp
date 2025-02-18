@@ -33,6 +33,7 @@
         var resultBytes = await fetchJsonRpc("eth_call", [
           {
             to: targetContract,
+            from: "0xa0Ee7A142d267C1f36714E4a8F75612F20a79720", // 9th admin account
             input: "0x17d7de7c", // cast sig "getName()"
           },
         ]);
@@ -49,8 +50,6 @@
         console.log(`targetContract: ${targetContract}`);
         console.log(`resultBytes: ${resultBytes}`);
         console.log(`name: ${name}`);
-      } catch (error) {
-        console.error("Error executing JSON-RPC calls:", error);
       }
     </script>
   </head>
