@@ -22,25 +22,25 @@
       }
 
       try {
-        const block = await fetchJsonRpc("eth_getBlockByNumber", [
-          "0x1",
-          false,
-        ]);
-        const targetHash = block.transactions[0];
+        var block = await fetchJsonRpc("eth_getBlockByNumber", ["0x1", false]);
+        var targetHash = block.transactions[0];
 
-        const transaction = await fetchJsonRpc("eth_getTransactionReceipt", [
+        var transaction = await fetchJsonRpc("eth_getTransactionReceipt", [
           targetHash,
         ]);
-        const targetContract = transaction.contractAddress;
+        var targetContract = transaction.contractAddress;
 
-        const resultBytes = await fetchJsonRpc("eth_call", [
+        var resultBytes = await fetchJsonRpc("eth_call", [
           {
             to: targetContract,
             input: "0x17d7de7c", // cast sig "getName()"
           },
         ]);
-        const name = new AbiCoder().decode(["string"], resultBytes)[0];
+        var name = new AbiCoder().decode(["string"], resultBytes)[0];
         document.getElementById("greeter").textContent = `Hello, ${name}!`;
+      } catch (error) {
+        console.error("Error executing JSON-RPC calls:", error);
+        document.getElementById("greeter").textContent = `Hello, Error!`;
 
         // Debugging
         console.log(block);
