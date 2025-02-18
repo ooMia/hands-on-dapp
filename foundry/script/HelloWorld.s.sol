@@ -2,17 +2,25 @@
 pragma solidity ^0.8.13;
 
 import {Script, console} from "forge-std/Script.sol";
-import {Counter} from "../src/Counter.sol";
+import {HelloWorld} from "src/HelloWorld.sol";
 
 contract CounterScript is Script {
-    Counter public counter;
+    uint256 secret;
+    address admin;
+    HelloWorld public world;
 
-    function setUp() public {}
+    function setUp() public {
+        secret = vm.envUint("PRIVATE_KEY"); // .env: PRIVATE_KEY=0x1234...
+        admin = vm.rememberKey(secret);
+        require(secret != 0 && admin != address(0), "check .env");
+    }
 
     function run() public {
         vm.startBroadcast();
 
-        counter = new Counter();
+        world = new HelloWorld();
+        world.setName("World");
+        console.log(string(abi.encodePacked("Hello, ", world.getName(), "!")));
 
         vm.stopBroadcast();
     }

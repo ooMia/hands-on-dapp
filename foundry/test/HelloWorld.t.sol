@@ -1,24 +1,28 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
-import {Test, console} from "forge-std/Test.sol";
-import {Counter} from "../src/Counter.sol";
+import {Test} from "forge-std/Test.sol";
+import {HelloWorld, NameUnset, Register} from "src/HelloWorld.sol";
+import {stdError} from "forge-std/StdError.sol";
 
 contract CounterTest is Test {
-    Counter public counter;
+    HelloWorld public world;
 
     function setUp() public {
-        counter = new Counter();
-        counter.setNumber(0);
+        world = new HelloWorld();
+        world.setName("World");
     }
 
-    function test_Increment() public {
-        counter.increment();
-        assertEq(counter.number(), 1);
+    function testFuzz_SetName(string calldata _name) public {
+        vm.expectEmitAnonymous();
+        emit Register(address(this), _name);
+        world.setName(_name);
+        assertEq(world.getName(), _name);
     }
 
-    function testFuzz_SetNumber(uint256 x) public {
-        counter.setNumber(x);
-        assertEq(counter.number(), x);
+    function test_RevertWhen_NameNotSet() public {
+        HelloWorld newWorld = new HelloWorld();
+        vm.expectRevert(NameUnset.selector);
+        newWorld.getName();
     }
 }
