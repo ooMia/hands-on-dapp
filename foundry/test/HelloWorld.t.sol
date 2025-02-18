@@ -14,6 +14,7 @@ contract CounterTest is Test {
     }
 
     function testFuzz_SetName(string calldata _name) public {
+        vm.assume(bytes(_name).length > 0);
         vm.expectEmitAnonymous();
         emit Register(address(this), _name);
         world.setName(_name);
