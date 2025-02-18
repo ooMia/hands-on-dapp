@@ -1,66 +1,30 @@
-## Foundry
+# HelloWorld
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+이름을 등록하고 조회할 수 있는 스마트 계약입니다.<br>단, 등록되지 않은 사용자의 이름을 조회하려고 하면 오류가 발생합니다.
 
-Foundry consists of:
+## 사용 시나리오
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+### 이름 등록
 
-## Documentation
+1. 사용자는 자신의 이름을 등록하기 위해 `setName` 함수를 호출합니다.
+   ```solidity
+   HelloWorld.setName("Alice");
+   ```
+2. 이름이 성공적으로 등록되면 `Register` 이벤트가 발생합니다.
 
-https://book.getfoundry.sh/
+### 이름 조회
 
-## Usage
+1. 사용자는 자신의 이름을 조회하기 위해 `getName` 함수를 호출합니다.
+   ```solidity
+   string memory myName = HelloWorld.getName();
+   ```
+2. 사용자는 다른 사용자의 이름을 조회하기 위해 `getName(address _address)` 함수를 호출할 수 있습니다.
+   ```solidity
+   string memory otherName = HelloWorld.getName(0x123...);
+   ```
 
-### Build
+## 주의 사항 및 오류 발생 상황
 
-```shell
-$ forge build
-```
+### NameUnset 오류
 
-### Test
-
-```shell
-$ forge test
-```
-
-### Format
-
-```shell
-$ forge fmt
-```
-
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+- `getName` 또는 `getName(address _address)` 함수를 호출할 때, 호출자의 이름이 등록된 상태가 아니라면 `NameUnset` 오류가 발생합니다.
