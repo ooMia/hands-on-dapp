@@ -2,6 +2,8 @@
 
 의존성을 최소화한 간단한 DApp
 
+스마트 컨트랙트의 개발 및 배포는 Foundry 프레임워크에서 관리
+
 ```bash
 npm install
 
