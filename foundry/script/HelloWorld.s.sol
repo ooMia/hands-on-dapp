@@ -20,8 +20,12 @@ contract CounterScript is Script {
 
         world = new HelloWorld();
         world.setName("World");
-        console.log(string(abi.encodePacked("Hello, ", world.getName(), "!")));
+        require(isStringEqual(world.getName(), "World"), "setName failed");
 
         vm.stopBroadcast();
+    }
+
+    function isStringEqual(string memory a, string memory b) internal pure returns (bool) {
+        return keccak256(abi.encodePacked(a)) == keccak256(abi.encodePacked(b));
     }
 }
