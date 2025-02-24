@@ -5,12 +5,18 @@
     "forge:deploy": "npm run --workspace=foundry deploy -- --rpc-url http://localhost:8545",
     "prestart": "anvil --allow-origin 'http://localhost:3000' & npm run forge:deploy",
     "start": "node src/index.js",
-    "poststart": "pkill anvil"
+    "poststart": "pkill anvil",
+    "test": "playwright test"
   },
   "workspaces": [
     "foundry"
   ],
   "devDependencies": {
+    "@playwright/test": "^1.50.1",
+    "@types/node": "^22.13.5",
     "solc": "0.8.28"
+  },
+  "dependencies": {
+    "ethers": "^6.13.5"
   }
 }
