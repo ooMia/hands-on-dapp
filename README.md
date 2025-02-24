@@ -1,13 +1,19 @@
-# case2-setup-foundry
+# case3-e2e-test
 
-의존성을 최소화한 간단한 DApp
+`Hello, World!`를 출력하는 간단한 DApp
 
-컨트랙트 관련 작업을 Foundry 프레임워크를 활용하여 하위 workspace로 분리
+GET `/api/name` 요청으로 등록된 배포자의 이름 참조
+
+- 하위 workspace로 Foundry 내장
+- [playwright](https://playwright.dev/)로 e2e 테스트
+- [ethers.js](https://docs.ethers.org/)로 컨트랙트 호출 결과 변환
 
 ```bash
 npm install
 
 npm start
+
+npm test
 ```
 
 ### Sequence Diagram
@@ -41,6 +47,7 @@ sequenceDiagram
 
     Note over U,S: e2e interaction
     U ->> S: localhost:3000
+    S ->> S: GET /api/name
     S ->> A: contract on 1st tx
     A -->> S: return address
     S ->> A: fetch getName()
