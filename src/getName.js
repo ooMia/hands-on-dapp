@@ -49,4 +49,4 @@ async function getName() {
   }
 }
 
-export { getName };
+export { fetchJsonRpc, getName };

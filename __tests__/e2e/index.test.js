@@ -1,4 +1,3 @@
-// @ts-check
 import { expect, test } from "@playwright/test";
 
 test.beforeEach(async ({ page }) => {
@@ -6,5 +5,6 @@ test.beforeEach(async ({ page }) => {
 });
 
 test("test", async ({ page }) => {
-  await expect(page.locator("#greeter")).toContainText("Hello, World!");
+  const greeter = page.locator("#greeter");
+  await expect(greeter).toHaveText("Hello, World!");
 });

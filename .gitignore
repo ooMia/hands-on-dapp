@@ -1,15 +1,8 @@
-# forge
-out
-cache
-
 # node 
 node_modules
 
 # mac
 .DS_Store
 
-# Playwright
-/test-results/
-/playwright-report/
-/blob-report/
-/playwright/.cache/
+# test artifacts
+out
