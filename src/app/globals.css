@@ -55,6 +55,7 @@ main {
     transform 0.3s ease;
 }
 
+#greeter,
 #title {
   font-size: 2rem;
   font-weight: bold;

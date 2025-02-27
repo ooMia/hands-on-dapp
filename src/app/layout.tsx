@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   keywords: ["React", "Fluent React", "Frontend"],
   authors: [{ name: "ooMia", url: "https://github.com/ooMia" }],
   openGraph: {
-    images: ["https://oomia.github.io/fluent-react/front.jpeg"],
+    images: ["https://oomia.github.io/hands-on-dapp/hello-world.jpeg"],
   },
 };
 
@@ -32,46 +32,6 @@ export default function RootLayout({
   const menubar = (
     <div id="menubar" className="sticky top-0 w-full">
       <Link href="/">Home</Link>
-      <Link href="/jsx">
-        Chapter 2
-        <br />
-        JSX
-      </Link>
-      <Link href="/virtual-dom">
-        Chapter 3
-        <br />
-        Virtual DOM
-      </Link>
-      <Link href="/reconciliation">
-        Chapter 4
-        <br />
-        Reconciliation
-      </Link>
-      <Link href="/patterns">
-        Chapter 5
-        <br />
-        Patterns
-      </Link>
-      <Link href="/ssr">
-        Chapter 6
-        <br />
-        SSR
-      </Link>
-      <Link href="/concurrency">
-        Chapter 7
-        <br />
-        Concurrency
-      </Link>
-      <Link href="/framework">
-        Chapter 8
-        <br />
-        Framework
-      </Link>
-      <Link href="/rsc">
-        Chapter 9
-        <br />
-        RSC
-      </Link>
     </div>
   );
 
