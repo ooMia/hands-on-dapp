@@ -14,10 +14,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Fluent React",
+  title: "Hands-on DApp",
   description:
-    "Practicing the concepts and exercises from the book 'Fluent React'",
-  keywords: ["React", "Fluent React", "Frontend"],
+    "Practicing concepts and exercises of DApp (Decentralized Application) using React, Ethereum, and Solidity.",
+  keywords: ["DApp", "React", "Ethereum", "Solidity"],
   authors: [{ name: "ooMia", url: "https://github.com/ooMia" }],
   openGraph: {
     images: ["https://oomia.github.io/hands-on-dapp/hello-world.jpeg"],
