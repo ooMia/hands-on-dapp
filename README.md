@@ -1,8 +1,10 @@
-# case4-next-ts
+# case5-onchain-sepolia
 
 `Hello, World!`를 출력하는 간단한 DApp
 
 GET `/api/name` 요청으로 등록된 배포자의 이름 참조
+
+스마트 컨트랙트는 Sepolia TestNet에 개인 계정으로 배포
 
 - 하위 workspace로 Foundry 내장
 - [node:test](https://nodejs.org/api/test.html)와 [tsx](https://tsx.is/)로 단위 테스트
