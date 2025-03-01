@@ -20,6 +20,7 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
+      "@/config/*": ["./src/app/api/config/*"],
       "@/public/*": ["./public/*"]
     }
   },

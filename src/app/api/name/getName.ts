@@ -1,25 +1,7 @@
-import dotenv from "dotenv";
-import {
-  createPublicClient,
-  decodeAbiParameters,
-  http,
-  toFunctionSelector,
-} from "viem";
-import { privateKeyToAddress } from "viem/accounts";
-import { anvil } from "viem/chains";
-
-dotenv.config({ path: "./foundry/.env" });
+import { client, deployer } from "@/config/[slug]/environment";
+import { decodeAbiParameters, toFunctionSelector } from "viem";
 
 async function getName() {
-  const client = createPublicClient({
-    chain: anvil,
-    transport: http(),
-  });
-
-  const deployer = privateKeyToAddress(
-    process.env.PRIVATE_KEY! as `0x${string}`,
-  );
-
   let _block, _targetHash, _transaction, _targetContract, _resultHex, _name;
   try {
     _block = await client.getBlock({ blockNumber: BigInt(1) });
