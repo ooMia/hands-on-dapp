@@ -1,21 +1,32 @@
+import { PHASE_DEVELOPMENT_SERVER } from "next/constants.js";
+
 // @ts-check
-
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  compiler: {
-    reactRemoveProperties: true,
-    removeConsole: {
-      exclude: ["error"],
+export default (phase, { defaultConfig }) => {
+  /**
+   * @type {import('next').NextConfig}
+   */
+  const nextConfig = {
+    env: {
+      NEXT_PHASE: phase,
     },
-  },
-  images: {
-    remotePatterns: [
-      {
-        hostname: "image.yes24.com",
-        pathname: "/goods/**",
+    compiler: {
+      ...defaultConfig.compiler,
+      reactRemoveProperties: true,
+      removeConsole: {
+        exclude: ["error"],
       },
-    ],
-  },
+    },
+    images: {
+      remotePatterns: [
+        {
+          hostname: "image.yes24.com",
+          pathname: "/goods/**",
+        },
+      ],
+    },
+  };
+  if (phase === PHASE_DEVELOPMENT_SERVER) {
+    nextConfig.compiler.removeConsole = false;
+  }
+  return nextConfig;
 };
-
-export default nextConfig;
