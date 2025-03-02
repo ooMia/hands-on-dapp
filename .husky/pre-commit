@@ -1,2 +1,2 @@
+prettier . --check
 pnpm test
-pnpm e2e
