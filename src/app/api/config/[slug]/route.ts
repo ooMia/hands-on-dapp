@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { client, deployer } from "./environment";
+import { client, deployer, nextPhase } from "./environment";
 
 export async function GET(
   request: Request,
@@ -10,25 +10,18 @@ export async function GET(
 }
 
 function getResult(slug: string): string {
-  let result = "not found";
-  const methodName = `get${slug.charAt(0).toUpperCase() + slug.slice(1).toLowerCase()}`;
-  if (typeof getterMap[methodName] === "function") {
-    result = getterMap[methodName]();
-  }
+  const methodName = slug.toUpperCase() as GetterMapKeys;
+  const result = getterMap[methodName]?.() ?? "not found";
   if (result === "need redirect") {
     redirect(`/api/${slug}`);
   }
   return result;
 }
 
-const getterMap: { [key: string]: () => string } = {};
+type GetterMapKeys = Uppercase<string>;
+const getterMap: { [key: GetterMapKeys]: () => string } = {};
 
-getterMap.getChain = function () {
-  return client.chain.name;
-};
-getterMap.getAddress = function () {
-  return deployer;
-};
-getterMap.getName = function () {
-  return "need redirect";
-};
+getterMap.CHAIN = () => client.chain.name;
+getterMap.ADDRESS = () => deployer;
+getterMap.NAME = () => "need redirect";
+getterMap.NEXT_PHASE = () => nextPhase;

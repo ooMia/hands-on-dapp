@@ -12,4 +12,6 @@ const client = createPublicClient({
 
 const deployer = privateKeyToAddress(process.env.PRIVATE_KEY! as `0x${string}`);
 
-export { client, deployer };
+const nextPhase = process.env.NEXT_PHASE as string;
+
+export { client, deployer, nextPhase };
