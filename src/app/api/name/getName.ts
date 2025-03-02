@@ -17,12 +17,13 @@ async function getName() {
     return _name;
   } catch (error) {
     console.error("\x1b[31mError executing getName():\x1b[0m", error);
-    console.error(_block);
-    console.error(`targetHash: ${_targetHash}`);
-    console.error(_transaction);
-    console.error(`targetContract: ${_targetContract}`);
-    console.error(`resultHex: ${_resultHex}`);
-    console.error(`name: ${_name}`);
+
+    console.debug(_block);
+    console.debug(`targetHash: ${_targetHash}`);
+    console.debug(_transaction);
+    console.debug(`targetContract: ${_targetContract}`);
+    console.debug(`resultHex: ${_resultHex}`);
+    console.debug(`name: ${_name}`);
   }
 }
 
