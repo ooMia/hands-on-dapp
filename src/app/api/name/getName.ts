@@ -1,13 +1,11 @@
 import { client, deployer } from "@/config/[slug]/environment";
-import { decodeAbiParameters, toFunctionSelector } from "viem";
+import { decodeAbiParameters, getAddress, toFunctionSelector } from "viem";
 
 async function getName() {
-  let _block, _targetHash, _transaction, _targetContract, _resultHex, _name;
+  let _targetContract, _resultHex, _name;
   try {
-    _block = await client.getBlock({ blockNumber: BigInt(1) });
-    _targetHash = _block.transactions[0];
-    _transaction = await client.getTransactionReceipt({ hash: _targetHash });
-    _targetContract = _transaction.contractAddress;
+    // TODO: automatically tracking the contract address by using proxy or factory pattern
+    _targetContract = getAddress("0xc2baed95c726af81d285411979d7713e6abdcd4f");
     _resultHex = await client.call({
       account: deployer,
       data: toFunctionSelector("getName()(string)"),
@@ -18,9 +16,6 @@ async function getName() {
   } catch (error) {
     console.error("\x1b[31mError executing getName():\x1b[0m", error);
 
-    console.debug(_block);
-    console.debug(`targetHash: ${_targetHash}`);
-    console.debug(_transaction);
     console.debug(`targetContract: ${_targetContract}`);
     console.debug(`resultHex: ${_resultHex}`);
     console.debug(`name: ${_name}`);
