@@ -1,8 +1,14 @@
 import { redirect } from "next/navigation";
 import { client, deployer, nextPhase } from "./environment";
 
+export async function generateStaticParams() {
+  return Object.keys(getterMap).map((key) => ({
+    slug: key,
+  }));
+}
+
 export async function GET(
-  request: Request,
+  _request: Request,
   { params }: { params: Promise<{ slug: string }> },
 ) {
   const { slug } = await params;
