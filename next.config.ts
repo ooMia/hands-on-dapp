@@ -1,3 +1,4 @@
+import "dotenv/config";
 import fs from "fs";
 import { NextConfig } from "next";
 import { PHASE_DEVELOPMENT_SERVER } from "next/constants.js";
@@ -28,8 +29,7 @@ export default (
       },
     });
   }
-  if (phase !== PHASE_DEVELOPMENT_SERVER) {
-    // overwrite ghPagesConfig into nextConfig
+  if (process.env.CI === "true") {
     Object.assign(nextConfig, ghPagesConfig);
   }
   return nextConfig;
