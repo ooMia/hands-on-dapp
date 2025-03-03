@@ -4,7 +4,7 @@
     "install": "forge install && forge update",
     "test": "forge test",
     "build": "forge build",
-    "deploy": "forge script script/HelloWorld.s.sol --broadcast"
+    "broadcast": "forge script script/HelloWorld.s.sol -f sepolia --verify --broadcast"
   },
   "devDependencies": {
     "solc": "0.8.28"
