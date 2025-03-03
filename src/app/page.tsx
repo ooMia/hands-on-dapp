@@ -1,15 +1,25 @@
 import helloWorld from "@/public/hello-world.jpeg";
-import { headers } from "next/headers";
+import "dotenv/config";
+import { PHASE_DEVELOPMENT_SERVER } from "next/constants";
 import Image from "next/image";
 
 async function fetchResult(path: string): Promise<string> {
-  const headersList = await headers();
-  const host = headersList.get("host");
-  // TODO: use env to set the URL to separate dev/prod
-  const url = `http://${host}/${path}`;
-  return fetch(url)
-    .then((res) => res.json())
-    .then((data) => data.result);
+  const baseUrl =
+    process.env.NEXT_PHASE !== PHASE_DEVELOPMENT_SERVER
+      ? "oomia.github.io"
+      : "localhost:3000";
+  const url = `http://${baseUrl}/${path}`;
+  const response = await fetch(url);
+  const text = await response.text();
+
+  console.log(`Response from ${url}:`, text);
+
+  const preTagContent = text.match(/<pre>(.*?)<\/pre>/)?.[1];
+  if (preTagContent) {
+    const data = JSON.parse(preTagContent);
+    return data.result;
+  }
+  return "Error";
 }
 
 async function Title() {
