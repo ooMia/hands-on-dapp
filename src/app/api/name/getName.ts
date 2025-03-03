@@ -24,6 +24,7 @@ async function getName() {
     console.debug(`targetContract: ${_targetContract}`);
     console.debug(`resultHex: ${_resultHex}`);
     console.debug(`name: ${_name}`);
+    return "Error";
   }
 }
 
