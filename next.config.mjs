@@ -1,6 +1,5 @@
 import "dotenv/config";
 import { PHASE_DEVELOPMENT_SERVER } from "next/constants.js";
-import { readFileSync } from "node:fs";
 
 // @see https://github.com/actions/configure-pages/blob/v5/src/set-pages-config.js
 /**
@@ -8,7 +7,8 @@ import { readFileSync } from "node:fs";
  */
 const ghPagesConfig = {
   output: "export",
-  basePath: `/${JSON.parse(readFileSync("package.json", "utf-8")).name}`,
+  // basePath: `/${JSON.parse(readFileSync("package.json", "utf-8")).name}`,
+  // pageExtensions: ["jsx", "js", "ts", "tsx"],
 };
 
 export default (phase, { defaultConfig }) => {

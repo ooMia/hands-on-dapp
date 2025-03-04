@@ -76,9 +76,8 @@ jobs:
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
-        # do not need when manually setting up pages
-        # with:
-        #   static_site_generator: next
+        with:
+          static_site_generator: next
 
       - name: Restore cache
         uses: actions/cache@v4

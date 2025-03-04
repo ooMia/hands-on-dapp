@@ -8,7 +8,7 @@
     "forge:deploy": "pnpm run --filter foundry broadcast:anvil --rpc-url http://localhost:8545",
     "predev": "anvil --allow-origin 'http://localhost:3000' & pnpm run forge:deploy",
     "dev": "next dev --turbopack",
-    "dev:ci": "pnpm prestart && CI=true pnpm dlx serve@latest out",
+    "dev:ci": "CI=true pnpm prestart && pnpm dlx serve@latest out",
     "postdev": "pnpm exec pkill anvil || true",
     "prestart": "next build -d",
     "start": "NODE_ENV=production next start",
