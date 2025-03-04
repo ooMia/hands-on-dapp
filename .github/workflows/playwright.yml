@@ -1,3 +1,5 @@
+# TODO: e2e test on GitHub Pages should run after the deployment job
+
 name: Playwright Tests
 on:
   push:
