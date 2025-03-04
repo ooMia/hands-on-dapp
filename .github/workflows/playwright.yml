@@ -11,18 +11,26 @@ jobs:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: "latest"
+          cache: pnpm
+
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+
       - name: Setup pnpm
         uses: pnpm/action-setup@v2
         with:
           version: "latest"
+          run_install: true
 
-      - name: Install Foundry
-        uses: foundry-rs/foundry-toolchain@v1
       - name: Install Playwright Browsers
         run: pnpm exec playwright install --with-deps
       - name: Run Playwright tests
