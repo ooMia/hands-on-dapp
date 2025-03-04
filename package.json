@@ -10,7 +10,7 @@
     "dev": "next dev --turbopack",
     "dev:ci": "pnpm prestart && CI=true pnpm dlx serve@latest out",
     "postdev": "pnpm exec pkill anvil || true",
-    "prestart": "next build",
+    "prestart": "next build -d",
     "start": "NODE_ENV=production next start",
     "format": "prettier . --write --cache --cache-strategy metadata",
     "pretest": "tsc && next lint",
