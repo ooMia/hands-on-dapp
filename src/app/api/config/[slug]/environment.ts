@@ -3,6 +3,7 @@ import { PHASE_DEVELOPMENT_SERVER } from "next/constants";
 import { createPublicClient, http } from "viem";
 import { privateKeyToAddress } from "viem/accounts";
 import { anvil, sepolia } from "viem/chains";
+import { getName } from "./getName";
 
 dotenv.config({ path: "./foundry/.env" });
 
@@ -19,4 +20,6 @@ function isDev() {
   return process.env.NEXT_PHASE === PHASE_DEVELOPMENT_SERVER;
 }
 
-export { client, deployer, isDev, nextPhase };
+const name = await getName();
+
+export { client, deployer, isDev, name, nextPhase };

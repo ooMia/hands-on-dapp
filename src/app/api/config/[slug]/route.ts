@@ -1,5 +1,4 @@
-import { redirect } from "next/navigation";
-import { client, deployer, nextPhase } from "./environment";
+import { client, deployer, name, nextPhase } from "./environment";
 
 export async function generateStaticParams() {
   return Object.keys(getterMap).map((key) => ({
@@ -18,9 +17,6 @@ export async function GET(
 function getResult(slug: string): string {
   const methodName = slug.toUpperCase() as GetterMapKeys;
   const result = getterMap[methodName]?.() ?? "not found";
-  if (result === "need redirect") {
-    redirect(`/api/${slug}`);
-  }
   return result;
 }
 
@@ -29,5 +25,5 @@ const getterMap: { [key: GetterMapKeys]: () => string } = {};
 
 getterMap.CHAIN = () => client.chain.name;
 getterMap.ADDRESS = () => deployer;
-getterMap.NAME = () => "need redirect";
+getterMap.NAME = () => name;
 getterMap.NEXT_PHASE = () => nextPhase;
