@@ -1,4 +1,5 @@
-import { client, deployer, name, nextPhase } from "./environment";
+import { client, deployer, nextPhase } from "./environment";
+import { name } from "./getName";
 
 export async function generateStaticParams() {
   return Object.keys(getterMap).map((key) => ({

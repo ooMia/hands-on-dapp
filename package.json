@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "forge:build": "pnpm run --filter foundry build",
-    "forge:deploy": "pnpm run --filter foundry deploy --rpc-url http://localhost:8545",
+    "forge:deploy": "pnpm run --filter foundry broadcast:anvil --rpc-url http://localhost:8545",
     "predev": "anvil --allow-origin 'http://localhost:3000' & pnpm run forge:deploy",
     "dev": "next dev --turbopack",
     "dev:ci": "pnpm prestart && CI=true pnpm dlx serve@latest out",

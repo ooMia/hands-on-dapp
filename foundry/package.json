@@ -4,7 +4,9 @@
     "install": "forge install && forge update",
     "test": "forge test",
     "build": "forge build",
-    "broadcast": "forge script script/HelloWorld.s.sol -f sepolia --verify --broadcast"
+    "broadcast": "forge script script/HelloWorld.s.sol --broadcast",
+    "broadcast:anvil": "forge script script/HelloWorld.local.s.sol --broadcast",
+    "broadcast:sepolia": "pnpm broadcast -f sepolia --verify"
   },
   "devDependencies": {
     "solc": "0.8.28"
