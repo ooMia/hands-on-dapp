@@ -11,12 +11,12 @@ const ghPagesConfig = {
   // pageExtensions: ["jsx", "js", "ts", "tsx"],
 };
 
-export default (phase, { defaultConfig }) => {
+export default (phase, { nextConfig }) => {
   /**
    * @type {import('next').NextConfig}
    */
-  const nextConfig = {
-    ...defaultConfig,
+  const config = {
+    ...nextConfig,
     env: {
       NEXT_PHASE: phase,
     },
@@ -25,14 +25,14 @@ export default (phase, { defaultConfig }) => {
     },
   };
   if (phase !== PHASE_DEVELOPMENT_SERVER) {
-    Object.assign(nextConfig.compiler, {
+    Object.assign(config.compiler, {
       removeConsole: {
         exclude: ["error"],
       },
     });
   }
   if (process.env.CI === "true") {
-    Object.assign(nextConfig, ghPagesConfig);
+    Object.assign(config, ghPagesConfig);
   }
-  return nextConfig;
+  return config;
 };
