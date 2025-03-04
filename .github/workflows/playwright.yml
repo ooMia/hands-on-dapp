@@ -4,8 +4,8 @@ name: Playwright Tests
 on:
   push:
     branches: [gh-pages]
-  pull_request:
-    branches: [gh-pages]
+  workflow_dispatch:
+
 jobs:
   test:
     timeout-minutes: 60
@@ -16,12 +16,6 @@ jobs:
         with:
           submodules: recursive
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: "latest"
-          cache: pnpm
-
       - name: Install Foundry
         uses: foundry-rs/foundry-toolchain@v1
 
@@ -30,6 +24,12 @@ jobs:
         with:
           version: "latest"
           run_install: true
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "latest"
+          cache: pnpm
 
       - name: Install Playwright Browsers
         run: pnpm exec playwright install --with-deps
