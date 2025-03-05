@@ -1,12 +1,20 @@
 "use client";
 
 import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
+import json from "react-syntax-highlighter/dist/esm/languages/prism/json";
 import jsx from "react-syntax-highlighter/dist/esm/languages/prism/jsx";
 import prism from "react-syntax-highlighter/dist/esm/styles/prism/prism";
 
 SyntaxHighlighter.registerLanguage("jsx", jsx);
+SyntaxHighlighter.registerLanguage("json", json);
 
-export default function CodeHighlight({ children }: { children: string }) {
+export default function CodeHighlight({
+  children,
+  language,
+}: {
+  children: string;
+  language: string;
+}) {
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(children);
@@ -29,12 +37,12 @@ export default function CodeHighlight({ children }: { children: string }) {
   return (
     <div style={{ position: "relative" }}>
       <SyntaxHighlighter
-        language="jsx"
+        language={language}
         style={{
           ...prism,
           'pre[class*="language-"]': {
             ...prism['pre[class*="language-"]'],
-            paddingRight: "4rem",
+            padding: "2rem ",
           },
         }}
       >

@@ -1,48 +1,63 @@
-// import { PHASE_DEVELOPMENT_SERVER } from "next/constants";
+import { client, deployer } from "@/config/[slug]/environment";
+import { name } from "@/config/[slug]/getName";
 
-// async function fetchResult(path: string): Promise<string> {
-//   const url =
-//     process.env.NEXT_PHASE === PHASE_DEVELOPMENT_SERVER
-//       ? `http://localhost:3000/${path}`
-//       : `https://oomia.github.io/${path}`;
-//   const tempResponse = (status: number) =>
-//     new Response(JSON.stringify({ result: "Error on fetch" }), {
-//       status: status,
-//     });
-//   const response = await fetch(url)
-//     .catch((error) => {
-//       console.error(`Error on fetch ${url}:`, error);
-//       return tempResponse(500);
-//     })
-//     .then((response) => {
-//       if (!response.ok) {
-//         console.error(`Error on fetch ${url}:`, response);
-//         return tempResponse(response.status);
-//       }
-//       return response;
-//     });
-//   const json = await response.json();
-//   return json.result;
-// }
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+async function parseInternalAPI(path: string) {
+  const host = "http://localhost:3000";
 
-// export async function Title() {
-//   const title = await fetchResult("api/config/name");
+  //   const host = "https://oomia.github.io/hands-on-dapp";
+  const response = await fetch(`${host}/api/${path}`);
+  const text = await response.text();
+  try {
+    // regex
+    // 1. html div tag
+    // 2. which id = result
+    // 3. can have any other props or children
+    // find and extract inner text
+    const regex = /<div id="result">[\s\S]*?{<\/span>([\s\S]*?)<\/code>/;
+    const regexResult = regex.exec(text);
 
-//   return <div id="greeter">Hello, {title}!</div>;
-// }
+    // extract inner text
+    // 1. all inner text located inside from tag end '>' to tag start '<'
+    // e.g. <div>i love</div><div>you</div> => [i love, you]
+    // 2. concat all inner text
+    // e.g. [i love, you] => i love you
+    // 3. replace quote {&quot;result&quot;:&quot;World&quot;} => {"result":"World"}
 
-// export async function Config() {
-//   const chain = await fetchResult("api/config/chain");
-//   const address = await fetchResult("api/config/address");
-//   const name = await fetchResult("api/config/name");
-//   const next_phase = await fetchResult("api/config/next_phase");
+    const stringifyJsonResult =
+      "{" +
+      regexResult![1]
+        .split(">")
+        .map((text) => text.split("<")[0])
+        .join("")
+        .replace(/&quot;/g, '"');
 
-//   return (
-//     <div id="config">
-//       <div>Chain: {chain}</div>
-//       <div>Address: {address}</div>
-//       <div>Name: {name}</div>
-//       <div>Next Phase: {next_phase}</div>
-//     </div>
-//   );
-// }
+    console.log(stringifyJsonResult);
+
+    return JSON.parse(stringifyJsonResult).result;
+  } catch (error) {
+    console.error("Error parsing internal API:", error);
+    return "Error";
+  }
+}
+
+export async function Title() {
+  // experimental feature
+  //   const name = await parseInternalAPI("config/name");
+
+  return <div id="greeter">Hello, {name}!</div>;
+}
+
+export async function Title2() {
+  return <div id="greeter">Hello, {name}!</div>;
+}
+
+export async function Config() {
+  return (
+    <div id="config">
+      <div>Chain: {client.chain.name}</div>
+      <div>Address: {deployer}</div>
+      <div>Name: {name}</div>
+    </div>
+  );
+}

@@ -1,3 +1,4 @@
+import CodeHighlight from "@/component/CodeHighlight";
 import { client, deployer, nextPhase } from "./environment";
 import { name } from "./getName";
 
@@ -7,12 +8,21 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function GET(
-  _request: Request,
-  { params }: { params: Promise<{ slug: string }> },
-) {
+export default async function Config({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
-  return Response.json({ result: getResult(slug) });
+  return (
+    <div id="result">
+      <CodeHighlight language="json">
+        {JSON.stringify({
+          result: getResult(slug),
+        })}
+      </CodeHighlight>
+    </div>
+  );
 }
 
 function getResult(slug: string): string {
