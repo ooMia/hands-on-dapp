@@ -1,5 +1,5 @@
 import CodeHighlight from "@/component/CodeHighlight";
-import { client, deployer, nextPhase } from "./environment";
+import { client, deployer } from "./environment";
 import { name } from "./getName";
 
 export async function generateStaticParams() {
@@ -26,15 +26,14 @@ export default async function Config({
 }
 
 function getResult(slug: string): string {
-  const methodName = slug.toUpperCase() as GetterMapKeys;
+  const methodName = slug.toLowerCase() as GetterMapKeys;
   const result = getterMap[methodName]?.() ?? "not found";
   return result;
 }
 
-type GetterMapKeys = Uppercase<string>;
+type GetterMapKeys = Lowercase<string>;
 const getterMap: { [key: GetterMapKeys]: () => string } = {};
 
-getterMap.CHAIN = () => client.chain.name;
-getterMap.ADDRESS = () => deployer;
-getterMap.NAME = () => name;
-getterMap.NEXT_PHASE = () => nextPhase;
+getterMap.name = () => client.chain.name;
+getterMap.address = () => deployer;
+getterMap.name = () => name;

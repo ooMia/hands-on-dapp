@@ -15,10 +15,8 @@ const deployer = isDev()
   ? privateKeyToAddress(process.env.ANVIL_PRIVATE_KEY! as `0x${string}`)
   : privateKeyToAddress(process.env.PRIVATE_KEY! as `0x${string}`);
 
-const nextPhase = process.env.NEXT_PHASE as string;
-
 function isDev() {
   return process.env.NEXT_PHASE === PHASE_DEVELOPMENT_SERVER;
 }
 
-export { client, deployer, isDev, nextPhase };
+export { client, deployer, isDev };

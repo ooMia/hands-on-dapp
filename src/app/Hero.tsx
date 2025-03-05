@@ -1,7 +1,5 @@
 import { client, deployer } from "@/config/[slug]/environment";
-import { name } from "@/config/[slug]/getName";
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function parseInternalAPI(path: string) {
   const host = "http://localhost:3000";
 
@@ -41,14 +39,10 @@ async function parseInternalAPI(path: string) {
   }
 }
 
+// using experimental feature
+const name = await parseInternalAPI("config/name");
+
 export async function Title() {
-  // experimental feature
-  //   const name = await parseInternalAPI("config/name");
-
-  return <div id="greeter">Hello, {name}!</div>;
-}
-
-export async function Title2() {
   return <div id="greeter">Hello, {name}!</div>;
 }
 
