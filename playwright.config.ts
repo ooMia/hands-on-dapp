@@ -5,7 +5,7 @@ import { defineConfig, devices } from "@playwright/test";
  * https://github.com/motdotla/dotenv
  */
 import "dotenv/config";
-const ENV_CI = process.env.CI === "true" ? true : false;
+const ENV_CI = process.env.CI === "true";
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -26,9 +26,7 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL: ENV_CI
-      ? "https://oomia.github.io/hands-on-dapp/"
-      : "http://127.0.0.1:3000/",
+    baseURL: "http://127.0.0.1:3000",
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: "on-first-retry",
@@ -74,8 +72,8 @@ export default defineConfig({
 
   /* Run your local dev server before starting the tests */
   webServer: {
-    command: "pnpm dev",
-    url: "http://127.0.0.1:3000/",
+    command: "pnpm start",
+    url: "http://127.0.0.1:3000",
     reuseExistingServer: !ENV_CI,
   },
 });
