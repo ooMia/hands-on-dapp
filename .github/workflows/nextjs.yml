@@ -5,7 +5,7 @@
 name: Deploy Next.js site to Pages
 
 on:
-  push:
+  pull_request:
     branches: [gh-pages]
 
   # Allows you to run this workflow manually from the Actions tab

@@ -11,7 +11,7 @@ import "dotenv/config";
 /**
  * @type {import('next').NextConfig}
  */
-const baseConfig = {
+const nextConfig = {
   compiler: {
     reactRemoveProperties: true,
   },
@@ -19,14 +19,12 @@ const baseConfig = {
 };
 
 if (process.env.NODE_ENV === "development") {
-  baseConfig.compiler.removeConsole = false;
-  baseConfig.experimental.allowDevelopmentBuild = true;
+  nextConfig.compiler.removeConsole = false;
+  nextConfig.experimental.allowDevelopmentBuild = true;
 
   if (process.env.CI === "true") {
-    baseConfig.output = "export";
+    nextConfig.output = "export";
   }
 }
-
-const nextConfig = baseConfig;
 
 export default nextConfig;
