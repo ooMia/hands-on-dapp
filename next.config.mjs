@@ -18,8 +18,6 @@ const baseConfig = {
   experimental: {},
 };
 
-export default injectOptional(baseConfig);
-
 function injectOptional(
   /**
    * @type {import('next').NextConfig}
@@ -36,3 +34,7 @@ function injectOptional(
   }
   return config;
 }
+
+const nextConfig = injectOptional(baseConfig);
+
+export default nextConfig;
