@@ -2,12 +2,11 @@ import { client, deployer } from "@/config/[slug]/environment";
 import { name as importedName } from "@/config/[slug]/getName";
 
 async function parseInternalAPI(path: string) {
-  const host = "https://oomia.github.io/hands-on-dapp";
-
-  //   const host = "https://oomia.github.io/hands-on-dapp";
-  const response = await fetch(`${host}/api/${path}`);
-  const text = await response.text();
   try {
+    const host = "https://oomia.github.io/hands-on-dapp";
+    const response = await fetch(`${host}/api/${path}`);
+    const text = await response.text();
+
     // regex
     // 1. html div tag
     // 2. which id = result
@@ -15,6 +14,9 @@ async function parseInternalAPI(path: string) {
     // find and extract inner text
     const regex = /<div id="result">[\s\S]*?{<\/span>([\s\S]*?)<\/code>/;
     const regexResult = regex.exec(text);
+    if (!regexResult) {
+      throw new Error("No regex match");
+    }
 
     // extract inner text
     // 1. all inner text located inside from tag end '>' to tag start '<'
@@ -25,7 +27,7 @@ async function parseInternalAPI(path: string) {
 
     const stringifyJsonResult =
       "{" +
-      regexResult![1]
+      regexResult[1]
         .split(">")
         .map((text) => text.split("<")[0])
         .join("")
