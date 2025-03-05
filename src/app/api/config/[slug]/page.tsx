@@ -34,6 +34,6 @@ function getResult(slug: string): string {
 type GetterMapKeys = Lowercase<string>;
 const getterMap: { [key: GetterMapKeys]: () => string } = {};
 
-getterMap.name = () => client.chain.name;
+getterMap.chain = () => client.chain.name;
 getterMap.address = () => deployer;
 getterMap.name = () => name;
