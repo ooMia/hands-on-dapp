@@ -18,23 +18,15 @@ const baseConfig = {
   experimental: {},
 };
 
-function injectOptional(
-  /**
-   * @type {import('next').NextConfig}
-   */
-  config,
-) {
-  if (process.env.NODE_ENV === "development") {
-    config.compiler.removeConsole = false;
-    config.experimental.allowDevelopmentBuild = true;
+if (process.env.NODE_ENV === "development") {
+  baseConfig.compiler.removeConsole = false;
+  baseConfig.experimental.allowDevelopmentBuild = true;
 
-    if (process.env.CI === "true") {
-      config.output = "export";
-    }
+  if (process.env.CI === "true") {
+    baseConfig.output = "export";
   }
-  return config;
 }
 
-const nextConfig = injectOptional(baseConfig);
+const nextConfig = baseConfig;
 
 export default nextConfig;
