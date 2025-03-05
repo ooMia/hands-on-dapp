@@ -1,7 +1,8 @@
 import { client, deployer } from "@/config/[slug]/environment";
+import { name as importedName } from "@/config/[slug]/getName";
 
 async function parseInternalAPI(path: string) {
-  const host = "http://localhost:3000";
+  const host = "https://oomia.github.io/hands-on-dapp";
 
   //   const host = "https://oomia.github.io/hands-on-dapp";
   const response = await fetch(`${host}/api/${path}`);
@@ -40,7 +41,9 @@ async function parseInternalAPI(path: string) {
 }
 
 // using experimental feature
-const name = await parseInternalAPI("config/name");
+const isExperimentalSuccess =
+  (await parseInternalAPI("config/name")) === "World";
+const name = isExperimentalSuccess ? "World" : importedName;
 
 export async function Title() {
   return <div id="greeter">Hello, {name}!</div>;
@@ -51,7 +54,10 @@ export async function Config() {
     <div id="config">
       <div>Chain: {client.chain.name}</div>
       <div>Address: {deployer}</div>
-      <div>Name: {name}</div>
+      <div>
+        Name: {isExperimentalSuccess ? "🔬" : ""}
+        {name}
+      </div>
     </div>
   );
 }

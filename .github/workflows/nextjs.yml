@@ -71,6 +71,7 @@ jobs:
         run: pnpm next build
         env:
           CI: "true"
+          NODE_ENV: production
           ETHERSCAN_API_KEY: ${{ secrets.ETHERSCAN_API_KEY }}
           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
           SEPOLIA_RPC_URL: ${{ secrets.SEPOLIA_RPC_URL }}
