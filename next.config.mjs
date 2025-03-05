@@ -1,32 +1,30 @@
-import { PHASE_DEVELOPMENT_SERVER } from "next/constants.js";
+/**
+ * This file should follow a few conventions to work with GitHub actions/configure-pages:
+ * 1. Only js, cjs, and mjs extensions are supported.
+ *    See: https://github.com/actions/configure-pages/blob/main/src/set-pages-config.js#L7
+ * 2. Only 10 cases of configuration initialization styles are supported.
+ *    See: https://github.com/actions/configure-pages/blob/main/src/config-parser.js#L71
+ */
 
-// @ts-check
-export default (phase, { defaultConfig }) => {
-  /**
-   * @type {import('next').NextConfig}
-   */
-  const nextConfig = {
-    env: {
-      NEXT_PHASE: phase,
-    },
-    compiler: {
-      ...defaultConfig.compiler,
-      reactRemoveProperties: true,
-      removeConsole: {
-        exclude: ["error"],
-      },
-    },
-    images: {
-      remotePatterns: [
-        {
-          hostname: "image.yes24.com",
-          pathname: "/goods/**",
-        },
-      ],
-    },
-  };
-  if (phase === PHASE_DEVELOPMENT_SERVER) {
-    nextConfig.compiler.removeConsole = false;
-  }
-  return nextConfig;
+import "dotenv/config";
+
+/**
+ * @type {import('next').NextConfig}
+ */
+const nextConfig = {
+  compiler: {
+    reactRemoveProperties: true,
+  },
+  experimental: {},
 };
+
+if (process.env.NODE_ENV === "development") {
+  nextConfig.compiler.removeConsole = false;
+  nextConfig.experimental.allowDevelopmentBuild = true;
+
+  if (process.env.CI === "true") {
+    nextConfig.output = "export";
+  }
+}
+
+export default nextConfig;

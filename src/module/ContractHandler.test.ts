@@ -3,7 +3,7 @@ import { suite, test } from "node:test";
 import { login } from "./ContractHandler";
 
 suite("Login", () => {
-  const account = "0xa0Ee7A142d267C1f36714E4a8F75612F20a79720";
+  const account = "0x4262Aa56B97f776C075883b6077719ca3B997023";
 
   test("should return registered account", () => {
     assert.strictEqual(login(), account);
