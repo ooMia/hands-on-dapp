@@ -9,7 +9,7 @@
     "predev": "anvil --allow-origin 'http://localhost:3000' & pnpm run forge:deploy",
     "dev": "next dev --turbopack",
     "postdev": "pnpm exec pkill anvil || true",
-    "prestart": "next build",
+    "prestart": "next build && pnpm predev",
     "start": "next start",
     "preformat": "next lint",
     "format": "prettier . --write",
