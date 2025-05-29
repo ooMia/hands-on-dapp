@@ -7,3 +7,9 @@ node_modules
 
 # mac
 .DS_Store
+
+# backward compatability
+*next*
+foundry
+.env*
+tsconfig.*
