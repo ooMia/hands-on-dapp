@@ -20,3 +20,5 @@ git checkout case2-setup-foundry
 - [4 - 스마트 컨트랙트 개발 및 배포](https://spems.tistory.com/105)
 - [5 - 스마트 컨트랙트 함수 호출](https://spems.tistory.com/106)
 - [6 - Foundry 기반 프로젝트](https://spems.tistory.com/107)
+- [7 - Next 기반 프로젝트 (개념)](https://spems.tistory.com/109)
+- [8 - Next 기반 프로젝트](https://spems.tistory.com/110)
