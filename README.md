@@ -12,13 +12,13 @@ GET `/api/name` 요청으로 등록된 배포자의 이름 참조
 - [ethers.js](https://docs.ethers.org/)로 컨트랙트 호출 결과 변환
 
 ```bash
-npm install
+pnpm install
 
-npm start
+pnpm dev
 
-npm test
+pnpm test
 
-npm e2e
+pnpm e2e
 ```
 
 ### Sequence Diagram
