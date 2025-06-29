@@ -5,12 +5,10 @@
   "type": "module",
   "scripts": {
     "format": "prettier . --write --cache --cache-strategy metadata --log-level warn && pnpm -r format",
-    "build": "pnpm run -r build",
+    "format:check": "pnpm -r format:check",
     "test": "pnpm -r test",
-    "dev": "pnpm run --filter front dev",
-    "start": "NODE_ENV=production pnpm build && next start",
-    "forge:deploy": "pnpm preforge && pnpm run --filter foundry broadcast:anvil --rpc-url http://localhost:8545",
-    "predev": "pnpm forge:deploy"
+    "build": "pnpm run -r build",
+    "start": "pnpm run --filter front start"
   },
   "devDependencies": {
     "prettier": "^3.6.2"
@@ -21,6 +19,10 @@
       "sharp",
       "unrs-resolver"
     ]
+  },
+  "engineStrict": true,
+  "engines": {
+    "node": "<=23"
   },
   "packageManager": "pnpm@10.12.4+sha512.5ea8b0deed94ed68691c9bad4c955492705c5eeb8a87ef86bc62c74a26b037b08ff9570f108b2e4dbd1dd1a9186fea925e527f141c648e85af45631074680184"
 }

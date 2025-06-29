@@ -2,9 +2,10 @@
   "name": "foundry",
   "scripts": {
     "install": "forge install && forge update",
-    "test": "forge test",
+    "test": "forge test -vvv",
     "build": "forge build",
     "format": "forge fmt",
+    "format:check": "forge fmt --check",
     "preanvil": "pkill anvil || true",
     "anvil": "anvil --allow-origin 'http://localhost:3000' &",
     "prebroadcast": "(pnpm run anvil &> /dev/null)",

@@ -1,5 +1,0 @@
-- [x] pnpm install (설치 성공만 확인)
-- [x] pnpm format (루트 정렬 && 각 워크스페이스로 전파 - 정렬 성공 확인)
-- [x] pnpm build (빌드 성공 확인)
-- [x] pnpm test (테스트 성공 확인)
-- [ ] pnpm dev

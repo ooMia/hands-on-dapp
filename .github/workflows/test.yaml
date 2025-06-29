@@ -1,8 +1,3 @@
-# 1. foundry format check
-# 2. foundry tests
-# 3. front format check
-# 4. front unit tests
-# 5. front e2e tests
 name: CI
 
 on:
@@ -11,17 +6,42 @@ on:
   workflow_dispatch:
 
 env:
+  NODE_ENV: production
+  CI: true
   FOUNDRY_PROFILE: ci
 
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
-  foundry:
-    name: Foundry Check
+  test:
+    environment: github-pages
     runs-on: ubuntu-latest
+    env:
+      ETHERSCAN_API_KEY: ${{ secrets.ETHERSCAN_API_KEY }}
+      PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+      SEPOLIA_RPC_URL: ${{ secrets.SEPOLIA_RPC_URL }}
     steps:
       - uses: actions/checkout@v4
         with:
           submodules: recursive
+
+      # SetUp
       - uses: foundry-rs/foundry-toolchain@v1
-      - run: forge fmt --check
-      - run: forge build --sizes
-      - run: forge test -vvv
+      - uses: pnpm/action-setup@v4
+        with:
+          version: latest
+          run_install: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: latest
+          cache: "pnpm"
+      - run: pnpm install
+
+      # Tests
+      - run: pnpm format:check
+      - run: pnpm build
+      - run: pnpm test
