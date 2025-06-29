@@ -17,6 +17,11 @@ concurrency:
   group: "pages"
   cancel-in-progress: false
 
+env:
+  NODE_ENV: production
+  CI: true
+  FOUNDRY_PROFILE: ci
+
 jobs:
   build:
     environment: github-pages
