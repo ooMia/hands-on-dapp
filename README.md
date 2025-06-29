@@ -1,63 +1,53 @@
 # case5-onchain-sepolia
 
-`Hello, World!`를 출력하는 간단한 DApp
+[계정 0x4262Aa56B97f776C075883b6077719ca3B997023](https://sepolia.etherscan.io/address/0x4262aa56b97f776c075883b6077719ca3b997023)으로
+[Sepolia에 배포된 컨트랙트](https://sepolia.etherscan.io/address/0xc2baed95c726af81d285411979d7713e6abdcd4f#code)에 등록된 이름을 참조하여
+`Hello, ${name}`을 출력하는 간단한 DApp
 
-GET `/api/name` 요청으로 등록된 배포자의 이름 참조
-
-스마트 컨트랙트는 Sepolia TestNet에 개인 계정으로 배포
-
-- 하위 workspace로 Foundry 내장
-- [node:test](https://nodejs.org/api/test.html)와 [tsx](https://tsx.is/)로 단위 테스트
-- [playwright](https://playwright.dev/)로 e2e 테스트
-- [ethers.js](https://docs.ethers.org/)로 컨트랙트 호출 결과 변환
-
-```bash
-pnpm install
-
-pnpm dev
-
-pnpm start
-
-pnpm test
-
-pnpm e2e
-```
+1. 프로젝트 구조 변경: Monorepo
+    - 하위 workspace로 분리 - `foundry`, `front`
+    - 루트 `package.json`에서 실행 가능한 명령어 정리
+2. 스마트 컨트랙트 및 배포 변경: `foundry/.env` 파일 기반 Sepolia 테스트넷 배포
+3. Route `api/config` - 시스템 설정 확인
+    - [`api/config/chain`](https://oomia.github.io/hands-on-dapp/api/config/chain)
+    - [`api/config/name`](https://oomia.github.io/hands-on-dapp/api/config/name)
+    - [`api/config/address`](https://oomia.github.io/hands-on-dapp/api/config/address)
+4. 실행 환경 및 의존성 업데이트
+    - node>=24, pnpm@10, next@15.3 (* 단, 이에 파생되는 breaking changes는 없습니다) 
+    - [jest](https://jestjs.io/)로 단위 테스트
+    - [playwright](https://playwright.dev/)로 e2e 테스트
+    - [viem](https://viem.sh/)로 컨트랙트 환경 설정 
+5. 공용 및 개별 프로젝트 명령어는 `package.json` 참조
 
 ### Sequence Diagram
 
 ```mermaid
 sequenceDiagram
+  actor User as User
+  participant Root as Root
+  participant Front as Front
+  participant Foundry as Foundry
 
-    actor U as User
-    participant N as Node
-
-    U ->> N: npm install
-    U ->> N: npm start
-    N -> N: npm prestart
-
-    create participant F as Forge
-    N ->> F: src/sol/build.sh
-    F -->> F: Build contract with solc
-    create participant A as Anvil
-    N ->> A: start Anvil on :3000
-    Note right of A: allow-origin :3000
-
-    F -->> A: Deploy as the 9th admin
-
-    box rgba(33,66,99,0.5) Foundry
-    participant A
-    participant F
-    end
-
-    create participant C as Client
-    N ->> C: start Client on :3000
-
-    Note over U,C: e2e interaction
-    U ->> C: localhost:3000
-    C ->> C: Get contract Address from env
-    C ->> A: fetch getName()
-    A -->> C: return "World"
-    C -->> U: display "Hello, World!"
+  User ->>+ Root: pnpm start
+  Root ->>- Front: pnpm run --filter front start
+  Note over Front: 'prestart' script runs
+  Front ->>+ Front: pnpm build
+  Note over Front: 'prebuild' script runs
+  Front ->>+ Foundry: pnpm run --filter foundry broadcast
+  Note over Foundry: 'prebroadcast' script runs
+  Foundry ->>+ Foundry: pnpm run anvil
+  Note over Foundry: 'preanvil' script runs
+  Foundry ->> Foundry: new msg
+  Foundry ->> Foundry: pkill anvil || true
+  par Start Anvil & Broadcast
+    Foundry ->> Foundry: (anvil ...) &
+  and 
+    Foundry ->> Foundry: forge script ... --broadcast
+  end
+  Foundry -->>- Front: broadcast complete
+  Front ->>- Front: next build -d
+  Note over Front: 'start' script runs
+  Front ->> Front: NODE_ENV=production next start
 ```
 
 # [Next.js 15](https://nextjs.org/blog/next-15)
