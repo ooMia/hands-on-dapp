@@ -7,7 +7,7 @@
     "postinstall": "if [ \"$CI\" != \"true\" ]; then pnpm exec playwright install --with-deps; fi",
     "prepare": "husky",
     "pretest": "tsc && next lint",
-    "test": "tsx --test && playwright test",
+    "test": "tsx --test",
     "posttest": "pnpm format --log-level silent",
     "e2e": "playwright test -x --quiet",
     "format": "prettier . --write --cache --cache-strategy metadata --log-level warn",
