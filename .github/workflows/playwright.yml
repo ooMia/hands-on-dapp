@@ -6,6 +6,9 @@ on:
     branches: [gh-pages]
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   test:
     environment: github-pages

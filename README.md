@@ -16,6 +16,8 @@ pnpm install
 
 pnpm dev
 
+pnpm start
+
 pnpm test
 
 pnpm e2e

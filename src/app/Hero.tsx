@@ -33,6 +33,8 @@ async function parseInternalAPI(path: string) {
         .join("")
         .replace(/&quot;/g, '"');
 
+    console.log(stringifyJsonResult);
+
     return JSON.parse(stringifyJsonResult).result;
   } catch (error) {
     console.error("Error parsing internal API:", error);

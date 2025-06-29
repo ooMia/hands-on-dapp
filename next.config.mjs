@@ -14,30 +14,17 @@ import "dotenv/config";
 const nextConfig = {
   compiler: {
     reactRemoveProperties: true,
-    removeConsole: {
-      exclude: ["error"],
-    },
   },
   experimental: {},
 };
 
 if (process.env.NODE_ENV === "development") {
-  nextConfig.experimental.allowDevelopmentBuild = true;
-}
-
-if (process.env.CI === "true") {
-  nextConfig.output = "export";
-}
-
-if (process.env.NODE_ENV !== "production") {
-  console.table(
-    Object.entries(process.env).map(([key, value]) => [
-      key,
-      value.slice(0, 50),
-    ]),
-  );
-
   nextConfig.compiler.removeConsole = false;
+  nextConfig.experimental.allowDevelopmentBuild = true;
+
+  if (process.env.CI === "true") {
+    nextConfig.output = "export";
+  }
 }
 
 export default nextConfig;

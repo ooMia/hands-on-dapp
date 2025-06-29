@@ -5,7 +5,7 @@ import { defineConfig, devices } from "@playwright/test";
  * https://github.com/motdotla/dotenv
  */
 import "dotenv/config";
-const ENV_CI = process.env.CI === "true";
+const ENV_CI = process.env.CI === "true" ? true : false;
 
 /**
  * See https://playwright.dev/docs/test-configuration.
