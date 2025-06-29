@@ -41,7 +41,7 @@ jobs:
         with:
           path: ~/.cache/ms-playwright
           key: ${{ runner.os }}-playwright-${{ hashFiles('**/playwright.config.[jt]s') }}
-          restore-keys: ${{ runner.os }}-playwright-
+          restore-keys: ${{ runner.os }}-playwright-${{ hashFiles('**/playwright.config.[jt]s') }}
       - name: Install Playwright Browsers
         if: steps.playwright-cache.outputs.cache-hit != 'true'
         run: pnpm --filter front exec playwright install --with-deps --only-shell
