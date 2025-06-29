@@ -6,10 +6,10 @@
   "scripts": {
     "format": "prettier . --write --cache --cache-strategy metadata --log-level warn && pnpm -r format",
     "build": "pnpm run -r build",
-    "dev": "pnpm run --filter front dev",
-    "forge:deploy": "pnpm preforge && pnpm run --filter foundry broadcast:anvil --rpc-url http://localhost:8545",
-    "start": "NODE_ENV=production pnpm build && next start",
     "test": "pnpm -r test",
+    "dev": "pnpm run --filter front dev",
+    "start": "NODE_ENV=production pnpm build && next start",
+    "forge:deploy": "pnpm preforge && pnpm run --filter foundry broadcast:anvil --rpc-url http://localhost:8545",
     "predev": "pnpm forge:deploy"
   },
   "devDependencies": {
