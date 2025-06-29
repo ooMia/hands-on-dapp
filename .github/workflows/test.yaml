@@ -37,7 +37,7 @@ jobs:
           node-version: ">=24"
           cache: "pnpm"
       - run: pnpm install
-      - run: pnpm --filter front exec playwright install --with-deps --only-shell
+      # - run: pnpm --filter front exec playwright install --with-deps --only-shell
 
       # Tests
       - run: pnpm format:check
