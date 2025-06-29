@@ -12,7 +12,7 @@
     "e2e": "playwright test -x --quiet",
     "format": "prettier . --write --cache --cache-strategy metadata --log-level warn",
     "format:check": "prettier . --check",
-    "prebuild": "pnpm run --filter foundry broadcast",
+    "prebuild": "(pnpm run --filter foundry broadcast &> /dev/null)",
     "build": "next build -d",
     "build:ci": "NODE_ENV=development CI=true pnpm build",
     "prestart": "pnpm build",
