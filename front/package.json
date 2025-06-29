@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "postinstall": "pnpm exec playwright install --with-deps",
+    "postinstall": "if [ \"$CI\" != \"true\" ]; then pnpm exec playwright install --with-deps; fi",
     "prepare": "husky",
     "pretest": "tsc && next lint",
     "test": "tsx --test",
