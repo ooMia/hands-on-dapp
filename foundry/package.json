@@ -7,7 +7,7 @@
     "format": "forge fmt",
     "format:check": "forge fmt --check",
     "preanvil": "pkill anvil || true",
-    "anvil": "(anvil --allow-origin 'http://localhost:3000' &> /dev/null) &",
+    "anvil": "(anvil --allow-origin 'http://localhost:3000' > /dev/null 2>&1) &",
     "prebroadcast": "pnpm run anvil",
     "broadcast": "forge script script/HelloWorld.s.sol --broadcast",
     "broadcast:sepolia": "forge script script/HelloWorld.s.sol --broadcast -f sepolia --verify"
