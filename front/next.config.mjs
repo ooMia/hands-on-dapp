@@ -18,13 +18,13 @@ const nextConfig = {
   experimental: {},
 };
 
+if (process.env.CI === "true") {
+  nextConfig.output = "export";
+}
+
 if (process.env.NODE_ENV === "development") {
   nextConfig.compiler.removeConsole = false;
   nextConfig.experimental.allowDevelopmentBuild = true;
-
-  if (process.env.CI === "true") {
-    nextConfig.output = "export";
-  }
 }
 
 export default nextConfig;

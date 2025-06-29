@@ -1,0 +1,68 @@
+name: CI tests
+
+on:
+  pull_request:
+    branches: [gh-pages, develop]
+  workflow_dispatch:
+
+env:
+  NODE_ENV: production
+  CI: true
+  FOUNDRY_PROFILE: ci
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    environment: github-pages
+    runs-on: ubuntu-latest
+    env:
+      ETHERSCAN_API_KEY: ${{ secrets.ETHERSCAN_API_KEY }}
+      PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+      SEPOLIA_RPC_URL: ${{ secrets.SEPOLIA_RPC_URL }}
+    steps:
+      # SetUp
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: foundry-rs/foundry-toolchain@v1
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ">=24"
+          cache: "pnpm"
+      - run: pnpm install
+
+      # SetUp - Playwright
+      - name: Cache Playwright browsers
+        id: playwright-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('**/playwright.config.[jt]s') }}
+          restore-keys: ${{ runner.os }}-playwright-${{ hashFiles('**/playwright.config.[jt]s') }}
+      - name: Install Playwright Browsers
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: pnpm --filter front exec playwright install --with-deps --only-shell
+
+      # SetUp - Frontend
+      - name: Cache Front build artifacts
+        uses: actions/cache@v4
+        with:
+          path: front/.next/cache
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
+          restore-keys: ${{ runner.os }}-nextjs-${{ hashFiles('**/pnpm-lock.yaml') }}-
+
+      # Tests
+      - run: pnpm format:check
+      - run: pnpm build
+      - run: pnpm test
+
+      # Tests - upload artifacts
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report
+          path: front/out/e2e
+          retention-days: 1

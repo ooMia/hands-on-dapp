@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 import { privateKeyToAccount } from "viem/accounts";
 
-dotenv.config({ path: "./foundry/.env" });
+dotenv.config({ path: "../foundry/.env" });
 
 const account = privateKeyToAccount(process.env.PRIVATE_KEY! as `0x${string}`);
 

@@ -2,13 +2,14 @@
   "name": "foundry",
   "scripts": {
     "install": "forge install && forge update",
-    "test": "forge test",
+    "test": "forge test -vvv",
     "build": "forge build",
+    "format": "forge fmt",
+    "format:check": "forge fmt --check",
+    "preanvil": "pkill anvil || true",
+    "anvil": "(anvil --allow-origin 'http://localhost:3000' > /dev/null 2>&1) &",
+    "prebroadcast": "pnpm run anvil",
     "broadcast": "forge script script/HelloWorld.s.sol --broadcast",
-    "broadcast:anvil": "forge script script/HelloWorld.local.s.sol --broadcast",
-    "broadcast:sepolia": "pnpm broadcast -f sepolia --verify"
-  },
-  "devDependencies": {
-    "solc": "0.8.28"
+    "broadcast:sepolia": "forge script script/HelloWorld.s.sol --broadcast -f sepolia --verify"
   }
 }
