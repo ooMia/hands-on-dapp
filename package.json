@@ -8,10 +8,12 @@
     "format:check": "pnpm -r format:check",
     "test": "pnpm -r test",
     "build": "pnpm run -r build",
-    "start": "pnpm run --filter front start"
+    "start": "pnpm run --filter front start",
+    "prepare": "husky"
   },
   "devDependencies": {
-    "prettier": "^3.6.2"
+    "prettier": "^3.6.2",
+    "husky": "^9.1.7"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
