@@ -17,7 +17,8 @@
     "test": "tsx --test",
     "posttest": "pnpm format --log-level silent",
     "e2e": "playwright test",
-    "prepare": "husky"
+    "prepare": "husky",
+    "postinstall": "pnpm exec playwright install --with-deps"
   },
   "dependencies": {
     "dotenv": "^16.6.1",
