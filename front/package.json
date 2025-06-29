@@ -14,9 +14,9 @@
     "format:check": "prettier . --check",
     "prebuild": "pnpm run --filter foundry broadcast",
     "build": "next build -d",
-    "build:ci": "NODE_ENV=development CI=true pnpm build",
     "prestart": "pnpm build",
     "start": "NODE_ENV=production next start",
+    "start:ci": "CI=true pnpm build && pnpm dlx serve@latest out",
     "predev": "pnpm run --filter foundry broadcast",
     "dev": "NODE_ENV=development next dev --turbopack"
   },
