@@ -4,20 +4,22 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "preforge": "anvil --allow-origin 'http://localhost:3000' &",
-    "forge:deploy": "pnpm preforge && pnpm run --filter foundry broadcast:anvil --rpc-url http://localhost:8545",
-    "build": "next build -d",
-    "start": "NODE_ENV=production pnpm build && next start",
-    "predev": "pnpm forge:deploy",
-    "postdev": "pnpm exec pkill anvil || true",
+    "format": "prettier . --write --cache --cache-strategy metadata --log-level warn && pnpm -r format",
+    "build": "pnpm run -r build",
     "dev": "pnpm run --filter front dev",
-    "format": "pnpm run --filter foundry --filter front format",
-    "test": "pnpm run --filter foundry --filter front test"
+    "forge:deploy": "pnpm preforge && pnpm run --filter foundry broadcast:anvil --rpc-url http://localhost:8545",
+    "start": "NODE_ENV=production pnpm build && next start",
+    "test": "pnpm -r test",
+    "predev": "pnpm forge:deploy"
+  },
+  "devDependencies": {
+    "prettier": "^3.6.2"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
+      "esbuild",
       "sharp",
-      "esbuild"
+      "unrs-resolver"
     ]
   },
   "packageManager": "pnpm@10.12.4+sha512.5ea8b0deed94ed68691c9bad4c955492705c5eeb8a87ef86bc62c74a26b037b08ff9570f108b2e4dbd1dd1a9186fea925e527f141c648e85af45631074680184"

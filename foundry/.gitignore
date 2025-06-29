@@ -3,12 +3,10 @@ cache/
 out/
 
 # Ignores broadcast logs
-broadcast
+broadcast/
 
 # Docs
 docs/
 
 # Dotenv file
 .env
-
-

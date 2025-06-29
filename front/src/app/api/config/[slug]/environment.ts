@@ -4,7 +4,7 @@ import { createPublicClient, http } from "viem";
 import { privateKeyToAddress } from "viem/accounts";
 import { anvil, sepolia } from "viem/chains";
 
-dotenv.config({ path: "./foundry/.env" });
+dotenv.config({ path: "../foundry/.env" });
 
 const client = createPublicClient({
   chain: isDev() ? anvil : sepolia,
