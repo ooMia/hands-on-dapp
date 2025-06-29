@@ -9,46 +9,16 @@
     "build": "next build -d",
     "start": "NODE_ENV=production pnpm build && next start",
     "predev": "pnpm forge:deploy",
-    "dev": "NODE_ENV=development next dev --turbopack",
-    "dev:ci": "pnpm predev && CI=true next build -d && pnpm dlx serve@latest out",
     "postdev": "pnpm exec pkill anvil || true",
-    "format": "prettier . --write --cache --cache-strategy metadata",
-    "pretest": "tsc && next lint",
-    "test": "tsx --test",
-    "posttest": "pnpm format --log-level silent",
-    "e2e": "playwright test",
-    "prepare": "husky",
-    "postinstall": "pnpm exec playwright install --with-deps"
+    "dev": "pnpm run --filter front dev",
+    "format": "pnpm run --filter foundry --filter front format",
+    "test": "pnpm run --filter foundry --filter front test"
   },
-  "dependencies": {
-    "dotenv": "^16.6.1",
-    "next": "^15.3.4",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "react-syntax-highlighter": "^15.6.1",
-    "viem": "^2.31.4"
-  },
-  "devDependencies": {
-    "@eslint/eslintrc": "^3.3.1",
-    "@playwright/test": "^1.53.1",
-    "@types/node": "^22.15.34",
-    "@types/react": "^19.1.8",
-    "@types/react-dom": "^19.1.6",
-    "@types/react-syntax-highlighter": "^15.5.13",
-    "eslint": "^9.30.0",
-    "eslint-config-next": "^15.3.4",
-    "husky": "^9.1.7",
-    "postcss": "^8.5.6",
-    "prettier": "^3.6.2",
-    "tailwindcss": "^3.4.17",
-    "tsx": "^4.20.3",
-    "typescript": "^5.7.3"
-  },
-  "packageManager": "pnpm@10.5.2",
   "pnpm": {
     "onlyBuiltDependencies": [
       "sharp",
       "esbuild"
     ]
-  }
+  },
+  "packageManager": "pnpm@10.12.4+sha512.5ea8b0deed94ed68691c9bad4c955492705c5eeb8a87ef86bc62c74a26b037b08ff9570f108b2e4dbd1dd1a9186fea925e527f141c648e85af45631074680184"
 }

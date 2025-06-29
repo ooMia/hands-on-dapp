@@ -49,17 +49,15 @@ sequenceDiagram
     participant F
     end
 
-    create participant S as Server
-    N ->> S: src/node/index.js<br>start Server on :3000
+    create participant C as Client
+    N ->> C: start Client on :3000
 
-    Note over U,S: e2e interaction
-    U ->> S: localhost:3000
-    S ->> S: GET /api/name
-    S ->> A: contract on 1st tx
-    A -->> S: return address
-    S ->> A: fetch getName()
-    A -->> S: return "World"
-    S -->> U: display "Hello, World!"
+    Note over U,C: e2e interaction
+    U ->> C: localhost:3000
+    C ->> C: Get contract Address from env
+    C ->> A: fetch getName()
+    A -->> C: return "World"
+    C -->> U: display "Hello, World!"
 ```
 
 # [Next.js 15](https://nextjs.org/blog/next-15)
