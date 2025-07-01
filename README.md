@@ -9,6 +9,8 @@ gh repo fork oomia/hands-on-dapp --clone
 # 시리즈별 브랜치 변경
 git checkout case1-hello-world
 git checkout case2-setup-foundry
+git checkout case4-case4-next-ts
+git checkout case5-onchain-sepolia
 ```
 
 ### Posts
@@ -22,3 +24,4 @@ git checkout case2-setup-foundry
 - [6 - Foundry 기반 프로젝트](https://spems.tistory.com/107)
 - [7 - Next 기반 프로젝트 (개념)](https://spems.tistory.com/109)
 - [8 - Next 기반 프로젝트](https://spems.tistory.com/110)
+- [9 - 실전 배포하기 (마지막 가이드)](https://spems.tistory.com/119)
