@@ -1,5 +1,4 @@
 import helloWorld from "@/public/hello-world.jpeg";
-import "dotenv/config";
 import Image from "next/image";
 import { Config, Title } from "./Hero";
 

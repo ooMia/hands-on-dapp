@@ -1,6 +1,6 @@
 import CodeHighlight from "@/component/CodeHighlight";
-import { client, deployer } from "./environment";
-import { name } from "./getName";
+import { helloWorldAddress, helloWorldName } from "@/module/contracts";
+import { client, deployer } from "@/module/environment";
 
 export async function generateStaticParams() {
   return Object.keys(getterMap).map((key) => ({
@@ -35,5 +35,6 @@ type GetterMapKeys = Lowercase<string>;
 const getterMap: { [key: GetterMapKeys]: () => string } = {};
 
 getterMap.chain = () => client.chain.name;
-getterMap.address = () => deployer;
-getterMap.name = () => name;
+getterMap.deployer = () => deployer;
+getterMap.contract_address = () => helloWorldAddress ?? "";
+getterMap.name = () => helloWorldName ?? "";
