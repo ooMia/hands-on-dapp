@@ -4,19 +4,25 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "prepare": "husky",
     "format": "prettier . --write --cache --cache-strategy metadata --log-level warn && pnpm -r format",
     "format:check": "pnpm -r format:check",
-    "test": "pnpm -r test",
-    "build": "pnpm run -r build",
-    "start": "pnpm run --filter front start",
-    "prepare": "husky"
+    "setup:env": "docker compose up -d && pnpm --filter foundry broadcast",
+    "ensure:env": "cast bn || pnpm run setup:env",
+    "pretest": "pnpm run ensure:env",
+    "test": "NODE_ENV=development pnpm -r test",
+    "predev": "pnpm run ensure:env",
+    "dev": "NODE_ENV=development pnpm run -r dev",
+    "build": "NODE_ENV=production pnpm run -r build",
+    "start": "NODE_ENV=production pnpm run --filter front start"
   },
   "devDependencies": {
-    "prettier": "^3.6.2",
-    "husky": "^9.1.7"
+    "husky": "^9.1.7",
+    "prettier": "^3.6.2"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
+      "@nestjs/core",
       "esbuild",
       "sharp",
       "unrs-resolver"
