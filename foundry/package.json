@@ -6,10 +6,9 @@
     "build": "forge build",
     "format": "forge fmt",
     "format:check": "forge fmt --check",
-    "preanvil": "pkill anvil || true",
-    "anvil": "(anvil --allow-origin 'http://localhost:3000' > /dev/null 2>&1) &",
-    "prebroadcast": "pnpm run anvil",
-    "broadcast": "forge script script/HelloWorld.s.sol --broadcast",
+    "require:anvil": "cast bn",
+    "prebroadcast": "pnpm require:anvil",
+    "broadcast": "forge script script/HelloWorld.local.s.sol --broadcast -f anvil",
     "broadcast:sepolia": "forge script script/HelloWorld.s.sol --broadcast -f sepolia --verify"
   }
 }

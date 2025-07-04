@@ -3,7 +3,7 @@ pragma solidity 0.8.30;
 
 error NameUnset();
 
-event Register(address indexed _address, string _name) anonymous;
+event Register(address indexed _address, string _name);
 
 contract HelloWorld {
     mapping(address => string) public names;
