@@ -33,10 +33,7 @@ jobs:
           node-version: ">=24"
           cache: "pnpm"
 
-      - run: mkdir -p foundry/lib
-      - working-directory: foundry
-        run: forge install && forge update
-      - run: pnpm install --filter front
+      - run: pnpm install --recursive
 
       # SetUp - Playwright
       - name: Cache Playwright browsers
