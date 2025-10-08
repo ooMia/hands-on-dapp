@@ -25,7 +25,6 @@ jobs:
       # SetUp
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0
           submodules: recursive
       - uses: foundry-rs/foundry-toolchain@v1
       - uses: pnpm/action-setup@v4
@@ -33,7 +32,12 @@ jobs:
         with:
           node-version: ">=24"
           cache: "pnpm"
-      - run: pnpm install --filter foundry
+          
+      - name: Check foundry/lib contents
+        run: ls -al foundry/lib
+      - run: mkdir -p foundry/lib
+      - run: cd foundry && forge install
+      
       - run: pnpm install --filter front
 
       # SetUp - Playwright
