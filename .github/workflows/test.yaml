@@ -28,7 +28,8 @@ jobs:
           submodules: recursive
 
       - uses: foundry-rs/foundry-toolchain@v1
-        cache: false
+        with:
+          cache: false
       - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
