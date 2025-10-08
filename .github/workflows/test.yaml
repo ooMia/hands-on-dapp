@@ -34,8 +34,7 @@ jobs:
           cache: "pnpm"
 
       - run: mkdir -p foundry/lib
-      - working-directory: foundry
-        run: pnpm install
+      - run: cd foundry && pnpm install
       - run: pnpm install --filter front
 
       # SetUp - Playwright
