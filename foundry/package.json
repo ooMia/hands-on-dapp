@@ -1,7 +1,6 @@
 {
   "name": "foundry",
   "scripts": {
-    "install": "forge install && forge update",
     "test": "forge test -vvv",
     "build": "forge build",
     "format": "forge fmt",
