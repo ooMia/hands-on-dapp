@@ -33,17 +33,9 @@ jobs:
           node-version: ">=24"
           cache: "pnpm"
 
-      - name: 현재 경로 확인
-        run: pwd
-      - name: foundry/lib 폴더 내용 확인
-        run: ls -al foundry/lib
-      - name: foundry/package.json 내용 확인
-        run: cat foundry/package.json
-      - name: 환경 변수 확인
-        run: env | grep FOUNDRY
-
       - run: mkdir -p foundry/lib
-      - run: cd foundry && pnpm install --reporter=ndjson
+      - working-directory: foundry
+        run: forge install && forge update
       - run: pnpm install --filter front
 
       # SetUp - Playwright

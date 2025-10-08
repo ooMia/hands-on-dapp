@@ -52,7 +52,8 @@ jobs:
         run: env | grep FOUNDRY
 
       - run: mkdir -p foundry/lib
-      - run: cd foundry && pnpm install --reporter=ndjson
+      - working-directory: foundry
+        run: forge install && forge update
       - run: pnpm install --filter front
 
       # SetUp - Frontend
