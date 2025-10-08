@@ -34,6 +34,10 @@ jobs:
           node-version: ">=24"
           cache: "pnpm"
 
+      - name: 현재 작업 디렉터리 확인
+        run: pwd
+      - name: foundry/lib 경로 확인
+        run: ls -al foundry/lib
       - run: git submodule update --init --recursive
       - run: ls -al foundry/lib/forge-std
       - run: pnpm install
