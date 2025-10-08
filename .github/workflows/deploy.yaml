@@ -41,7 +41,10 @@ jobs:
         with:
           node-version: ">=24"
           cache: "pnpm"
-      - run: pnpm install
+
+      - working-directory: foundry
+        run: pnpm install
+      - run: pnpm install --filter front
 
       # SetUp - Frontend
       - uses: actions/configure-pages@v5

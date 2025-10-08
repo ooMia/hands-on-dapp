@@ -32,12 +32,9 @@ jobs:
         with:
           node-version: ">=24"
           cache: "pnpm"
-          
-      - name: Check foundry/lib contents
-        run: ls -al foundry/lib
-      - run: mkdir -p foundry/lib
-      - run: cd foundry && forge install
-      
+
+      - working-directory: foundry
+        run: pnpm install
       - run: pnpm install --filter front
 
       # SetUp - Playwright
