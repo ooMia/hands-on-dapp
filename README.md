@@ -12,7 +12,7 @@ GET `/api/name` 요청으로 등록된 배포자의 이름 참조
 - [ethers.js](https://docs.ethers.org/)로 컨트랙트 호출 결과 변환
 
 ```bash
-pnpm install
+pnpm install && pnpm install:foundry
 
 pnpm dev
 

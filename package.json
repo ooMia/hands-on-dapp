@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "install:foundry": "cd foundry && forge install && forge update",
     "format": "prettier . --write --cache --cache-strategy metadata --log-level warn && pnpm -r format",
     "format:check": "pnpm -r format:check",
     "test": "pnpm -r test",

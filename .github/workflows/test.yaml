@@ -38,8 +38,7 @@ jobs:
         with:
           node-version: ">=24"
           cache: "pnpm"
-
-      - run: pnpm install --filter front
+      - run: pnpm install
 
       # SetUp - Playwright
       - name: Cache Playwright browsers
