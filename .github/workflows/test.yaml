@@ -27,15 +27,20 @@ jobs:
         with:
           submodules: recursive
 
-      - uses: foundry-rs/foundry-toolchain@v1
       - uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+      - run: pwd
+
       - uses: actions/setup-node@v4
         with:
           node-version: ">=24"
           cache: "pnpm"
+      - run: pwd
 
-      - name: 현재 작업 디렉터리 확인
-        run: pwd
+      - uses: foundry-rs/foundry-toolchain@v1
+      - run: pwd
+
       - name: foundry/lib 경로 확인
         run: ls -al foundry/lib
       - run: git submodule update --init --recursive
