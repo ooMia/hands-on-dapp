@@ -42,8 +42,7 @@ jobs:
           node-version: ">=24"
           cache: "pnpm"
 
-      - working-directory: foundry
-        run: pnpm install
+      - run: cd foundry && pnpm install
       - run: pnpm install --filter front
 
       # SetUp - Frontend
